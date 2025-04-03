@@ -1,0 +1,59 @@
+# Ignorer les fichiers binaires et objets
+[Dd]ebug/
+[Dd]ebugPublic/
+[Dd]evelopment/
+[Dd]evelopmentPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Ignorer les fichiers de configuration locaux
+appsettings.Development.json
+appsettings.Local.json
+
+# Ignorer les répertoires spécifiques aux environnements de développement
+.vs/
+.idea/
+.vscode/
+
+# Ignorer les fichiers générés par Visual Studio
+Generated\ Files/
+
+# Ignorer les fichiers de test
+[Tt]estResults/
+[Bb]uild[Ll]og.*
+
+# Ignorer les fichiers de cache de Rider
+.idea/
+
+# Ignorer les fichiers de configuration de Visual Studio Code
+.vscode/
+
+# Ignorer les fichiers de configuration de JetBrains Rider
+.idea/
+
+# Ignorer les fichiers de build de NCrunch
+.ncrunch/
+
+# Ignorer les fichiers de build de ReSharper
+_ReSharper/
+
+# Ignorer les fichiers de build de StyleCop
+StyleCopReport.xml
+
+# Ignorer les fichiers de build de BenchmarkDotNet
+BenchmarkDotNet.Artifacts/
+
+# Ignorer les fichiers de build de ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Ignorer les fichiers de build de ASP.NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
