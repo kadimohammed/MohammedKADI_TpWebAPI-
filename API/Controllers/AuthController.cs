@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Service.DTOS;
+using Service.Exceptions;
 using Service.Services;
 using Service.Services.Interfaces;
 
@@ -27,13 +28,26 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
-            _logger.LogInformation($"Tentative dinscription pour l'utilisateur : {model.Username}");
-
-            UserDto user = await _userService.RegisterUserAsync(model.Username, model.Email, model.Password);
-            if (user is not null)
+            
+            try
             {
-                _logger.LogInformation($"Utilisateur {model.Username} bien Enregister.");
-                return Ok(new { Id = user.Id });
+                // Vérification si l'utilisateur existe déjà avec le nom d'utilisateur
+                UserDto existingUser = await _userService.GetUserByUsernameAsync(model.Username);
+                if (existingUser != null)
+                {
+                    _logger.LogWarning($"Tentative d'inscription avec un nom d'utilisateur déjà pris : {model.Username}");
+                    return BadRequest("Nom d'utilisateur déjà exist.");
+                }
+            }
+            catch (InvalidUserException ex)
+            {
+                _logger.LogInformation($"Tentative dinscription pour l'utilisateur : {model.Username}");
+                UserDto user = await _userService.RegisterUserAsync(model.Username, model.Email, model.Password);
+                if (user is not null)
+                {
+                    _logger.LogInformation($"Utilisateur {model.Username} bien Enregister.");
+                    return Ok(new { Id = user.Id });
+                }
             }
 
             _logger.LogWarning($"Échec d'inscription pour l'utilisateur : {model.Username}");
